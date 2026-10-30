@@ -1,56 +1,140 @@
-# Azure Databricks Data Engineering | Finance & Healthcare
+
+# Healthcare Claims Data Engineering Pipeline
 
 ## Project Overview
 
-A multi-industry data engineering portfolio demonstrating scalable, production-oriented data pipeline designs for **Financial Services, Healthcare, and Insurance**.
+An end-to-end healthcare claims data engineering portfolio project that demonstrates data ingestion, validation, transformation, and business reporting using a Medallion Architecture.
 
-This portfolio focuses on building data ingestion, transformation, validation, and analytics solutions using Azure Databricks, PySpark, SQL, and Delta Lake.
-
-## Technology Stack
-
-- Azure Databricks
-- Python & PySpark
-- SQL
-- Delta Lake
-- Azure Data Factory (planned)
-- Git & GitHub
-
-## Project 1: Financial Transactions Pipeline
-
-**Planned capabilities:**
-- Transaction ingestion and incremental processing
-- Bronze, Silver, and Gold data layers
-- Data quality and duplicate detection
-- Financial reporting and analytics
-
-## Project 2: Healthcare Claims Analytics Pipeline
-
-**Planned capabilities:**
-- Synthetic medical claims and insurance datasets
-- Claims validation and standardization
-- Provider and member data integration
-- Claims cost and utilization analytics
-- Data quality controls
-
-## Project 3: Patient Encounter Analytics
-
-**Planned capabilities:**
-- Synthetic patient and clinical encounter data
-- HL7 FHIR-inspired data structures
-- Healthcare utilization reporting
-- Privacy-conscious healthcare data processing
+The project uses synthetic healthcare claims data and currently runs locally using Python and CSV files.
 
 ## Architecture
 
-Source Data → Bronze → Silver → Gold → Analytics
+Synthetic Claims Data
+        |
+        v
+Bronze Layer (Raw Data + Metadata)
+        |
+        v
+Data Quality Validation
+        |
+        v
+Silver Layer (Cleaned Data)
+        |
+        v
+Gold Layer (Aggregated Claims)
+        |
+        v
+Healthcare KPI Reporting
 
-## Project Status
+## Technologies
 
-Under development. Implementations, tests, and execution instructions will be added as the projects are developed.
+- Python 3
+- CSV Processing
+- Git and GitHub
+- Visual Studio Code
+- Medallion Architecture
 
-All datasets will be synthetic. No real patient information, employer data, or confidential financial records will be used.
+### Planned Enhancements
 
-## Author
+- PySpark and Spark SQL
+- Azure Databricks
+- Delta Lake
+- Incremental Processing
+- Automated Testing
+- Azure Data Factory Orchestration
 
-**Manpreet Aujla**  
-Senior Data Engineer
+## Project Structure
+
+```text
+healthcare_claims/
+├── data/
+│   ├── claims.csv
+│   ├── bronze/
+│   │   └── claims_bronze.csv
+│   ├── silver/
+│   │   └── claims_silver.csv
+│   └── gold/
+│       └── claims_summary.csv
+├── generate_claims.py
+├── bronze_ingestion.py
+├── validate_claims.py
+├── silver_transformation.py
+├── gold_transformation.py
+└── healthcare_kpis.py
+```
+
+## Pipeline Features
+
+### Bronze Layer
+- Ingests synthetic healthcare claims.
+- Preserves source records.
+- Adds ingestion timestamps and source filenames.
+
+### Data Validation
+- Checks missing values.
+- Identifies duplicate claim IDs.
+- Detects invalid claim amounts.
+- Validates claim statuses.
+
+### Silver Layer
+- Standardizes service dates.
+- Normalizes claim statuses.
+- Validates claim amounts.
+- Removes duplicate claims.
+- Produces cleaned records.
+
+### Gold Layer
+- Aggregates claims by status.
+- Calculates claim counts and total claimed amounts.
+- Generates reporting-ready CSV output.
+
+### KPI Reporting
+- Total claims
+- Total claimed amount
+- Approved claims and approval rate
+- Denied claims and denial rate
+- Pending claims and pending rate
+
+## How to Run
+
+From the repository root:
+
+```powershell
+python healthcare_claims/generate_claims.py
+python healthcare_claims/bronze_ingestion.py
+python healthcare_claims/validate_claims.py
+python healthcare_claims/silver_transformation.py
+python healthcare_claims/gold_transformation.py
+python healthcare_claims/healthcare_kpis.py
+```
+
+## Sample Execution Results
+
+The initial dataset contains 1,000 synthetic healthcare claims.
+
+- Bronze records: 1,000
+- Silver records: 1,000
+- Rejected records: 0
+
+KPI values are calculated dynamically from the generated data.
+
+## Data Privacy
+
+This project uses synthetic data only.
+
+No real patient information, protected health information (PHI), or medical records are included.
+
+This is a portfolio demonstration, not a HIPAA-certified production system.
+
+## Future Roadmap
+
+1. Convert local Python transformations to PySpark.
+2. Implement Delta Lake Bronze, Silver, and Gold tables.
+3. Add schema enforcement and data quality tests.
+4. Introduce incremental ingestion.
+5. Build Azure Data Factory orchestration.
+6. Create healthcare analytics dashboards.
+
+## Purpose
+
+Demonstrate practical data engineering skills applicable to healthcare claims processing, data quality, ETL pipelines, and analytics.

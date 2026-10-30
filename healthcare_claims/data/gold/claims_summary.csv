@@ -1,0 +1,4 @@
+claim_status,claim_count,total_claim_amount,percentage
+Approved,748,1888983.75,74.80
+Denied,100,259189.48,10.00
+Pending,152,404228.45,15.20
